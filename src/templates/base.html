@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>
+            {% block title %}{% endblock %}
+        </title>
+        <meta name="description"
+              content="{% block meta_description %}
+                       {% endblock %}" />
+        <meta property="og:title"
+              content="{% block og_title %}
+                       {% endblock %}
+                       - christinanissi.com" />
+        <meta property="og:description"
+              content="{% block og_description %}
+                       {% endblock %}" />
+        <meta property="og:image" content="{% static "" %}" />
+        <meta property="og:url" content="https://url.com/" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+        <link href="{% static "css/main.css" %}" rel="stylesheet" />
+        <link href="css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+              crossorigin="anonymous" />
+    </head>
+    <body>
+        <div id="wrapwrap">
+            <header id="top">
+                <nav class="navbar navbar-expand-lg navbar-scroll navbar-light">
+                    <div class="container">
+                        <a href="/" class="navbar-brand">
+                            <img src="{% static "files/.png" %}" alt="" width="260" />
+                        </a>
+                        <button class="navbar-toggler"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#top_menu_bar"
+                                aria-controls="top_menu_bar"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div id="top_menu_bar" class="collapse navbar-collapse">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item dropdown">
+                                    <a data-bs-toggle="dropdown"
+                                       class="nav-link dropdown-toggle"
+                                       id="navbarDropdown"
+                                       role="button"
+                                       aria-expanded="false"
+                                       href="{% url 'art_list' %}">Art <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li>
+                                            <a href="{% url 'art_list' %}" class="dropdown-item">Art</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'tag' 'concept' %}" class="dropdown-item">Concept Art</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'tag' 'illustration' %}" class="dropdown-item">Illustration</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'tag' 'comic' %}" class="dropdown-item">Comic</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'writing_list' %}">Writing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="link" target="_blank">Link</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="link" target="_blank">GitHub</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <main>
+                <div class="container-md p-3 mt-5">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+            <footer class="mt-5" id="bottom">
+                <div id="footer" class="container-md mt-5 pb-3">
+                    <div class="row align-items-end">
+                        <div class="col-sm-auto text-start text-muted">
+                            <span>Copyright © {% now "Y" %}</span>
+                        </div>
+                        <div class="col text-start text-sm-end text-muted">
+                            <a href="{% url 'contact' %}" class="text-reset"><span>Contact</span></a>
+                            <a href="{% url 'rss' %}" class="text-reset"><span>RSS</span></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

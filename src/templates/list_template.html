@@ -1,0 +1,42 @@
+{% load thumbnail %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-lg-5 g-md-4 g-3 cn_row">
+    {% for content in contents %}
+        <div class="col cn_col">
+            {% if content.category == 1 %}
+                <div class="cn_art_content card">
+                    <a href="{% url 'content_detail' content.slug %}">
+                        {% with content.images.all.0 as image %}
+                            <div class="cn_art_content_overlay"></div>
+                            <div class="cn_art_content_image">
+                                {% thumbnail image.image "500" as im %}
+                                <img src="{{ im.url }}" alt="{{ image.title }}" />
+                            {% endthumbnail %}
+                        </div>
+                        <div class="cn_art_content_details">
+                            <h2 class="cn_art_content_title h4">{{ content.title }}</h2>
+                        </div>
+                    {% endwith %}
+                </a>
+            </div>
+        {% elif content.category == 2 %}
+            <div class="cn_writing_card card">
+                <div class="card-body cn_writing_body">
+                    <a href="{% url 'content_detail' content.slug %}" class="text-reset">
+                        <h2 class="card-title h4">{{ content.title }}</h2>
+                    </a>
+                    <h4 class="card-subtitle mb-2 text-muted h6">
+                        {{ content.publish_date | date:"M d, Y" }}
+                        {% if content.tags.all %}—{% endif %}
+                        {% for tag in content.tags.all %}
+                            <a href="{% url 'tag' tag.slug %}">{{ tag.name }}</a>
+                            {% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </h4>
+                    <p class="card-text">{{ content.teaser }}</p>
+                    <a href="{% url 'content_detail' content.slug %}">Read More</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endfor %}
+</div>

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Home{% endblock %}
+{% block og_title %}Home{% endblock %}
+{% block meta_description %}Description{% endblock %}
+{% block og_description %}Description{% endblock %}
+{% block content %}
+    {% include "list_template.html" with contents=contents %}
+{% endblock %}
